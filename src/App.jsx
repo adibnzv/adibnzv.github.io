@@ -10,11 +10,11 @@ const PROFILE = {
   blurb:
     "I study within-host virus evolution and computational genomics. My research focuses on SARS‑CoV‑2 intra‑host diversity, methods for detecting suspicious mutations, and building reproducible pipelines for large-scale genomic analysis.",
   socials: {
-    x: "https://x.com/your-handle",
-    bluesky: "https://bsky.app/profile/your-handle",
-    github: "https://github.com/your-username",
-    researchgate: "https://www.researchgate.net/profile/Your-Name",
-    orcid: "https://orcid.org/0000-0000-0000-0000",
+    x: "https://x.com/BZman101",
+    bluesky: "https://bsky.app/profile/adibz.bsky.social",
+    github: "https://github.com/adibnzv",
+    researchgate: "https://www.researchgate.net/profile/Adi-Ben-Zvi-2?ev=hdr_xprf",
+    orcid: "https://orcid.org/0009-0003-5906-6821",
   },
 };
 
@@ -113,7 +113,7 @@ export default function PersonalWebsite() {
               <p className="text-sm text-slate-700">PhD, Bioinformatics (Virus Evolution)</p>
               <p className="text-xs text-slate-600">2023 – Present</p>
               <p className="mt-2 text-sm text-slate-700 leading-relaxed">
-                Research in viral evolution, intra‑host dynamics, and computational genomics in the Adi Stern Lab.
+                Research in viral evolution, intra‑host dynamics, and computational genomics in Adi Stern's Lab.
               </p>
             </div>
           </li>
