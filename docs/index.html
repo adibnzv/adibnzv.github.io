@@ -4,22 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adi-Ben-Zvi.com</title>
-    <script type="module" crossorigin src="/assets/index-_t4CCAGD.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CgQ5dnji.css">
-  </head>
-  <body class="bg-slate-50">
-    <div id="root"></div>
-        <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll("a[href]").forEach(link => {
-          const href = link.getAttribute("href");
-          // open all links except same-page anchors
-          if (href && !href.startsWith("#")) {
-            link.target = "_blank";
-            link.rel = "noopener noreferrer";
-          }
-        });
-      });
+    <script>
+      // Apply dark mode if user's system prefers it or if they previously selected it
+      if (
+        localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     </script>
+    <script type="module" crossorigin src="/assets/index-BMKpiuxp.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Df7DyNPB.css">
+  </head>
+  <body class="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-500">
+  <div id="root"></div>
   </body>
 </html>
