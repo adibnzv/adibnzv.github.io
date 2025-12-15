@@ -10,11 +10,11 @@ const PROFILE = {
   blurb:
     "I study within-host virus evolution and computational genomics. My research focuses on SARS‑CoV‑2 intra‑host diversity, methods for detecting suspicious mutations, and building reproducible pipelines for large-scale genomic analysis.",
   socials: {
-    x: "https://x.com/your-handle",
-    bluesky: "https://bsky.app/profile/your-handle",
-    github: "https://github.com/your-username",
-    researchgate: "https://www.researchgate.net/profile/Your-Name",
-    orcid: "https://orcid.org/0000-0000-0000-0000",
+    x: "https://https://x.com/BZman101.com/your-handle",
+    bluesky: "https://bsky.app/profile/adibz.bsky.social",
+    github: "https://github.com/adibnzv",
+    researchgate: "https://www.researchgate.net/profile/Adi-Ben-Zvi-2?ev=hdr_xprf",
+    orcid: "https://orcid.org/my-orcid?orcid=0009-0003-5906-6821",
   },
 };
 

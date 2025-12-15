@@ -2,7 +2,7 @@
   "name": "adi-ben-zvi",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/adibnzv/adibnzv.github.io",
+  "homepage": "https://adibnzv.github.io",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
