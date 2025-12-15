@@ -8,7 +8,7 @@ const PROFILE = {
   name: "Adi Ben Zvi",
   role: "PhD Student · Virus Evolution & Bioinformatics",
   affiliation: "Adi Stern Lab @ Tel Aviv University",
-  photoUrl: "public/your-photo.jpg",
+  photoUrl: "/your-photo.jpg",
   blurb:
     "I study within-host virus evolution and computational genomics. My research focuses on SARS‑CoV‑2 intra‑host diversity, methods for detecting suspicious mutations, and building reproducible pipelines for large-scale genomic analysis.",
   socials: {
