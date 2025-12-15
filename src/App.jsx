@@ -148,6 +148,8 @@ export default function PersonalWebsite() {
                 <a
                   key={j}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-50"
                 >
                   <LinkIcon className="w-4 h-4" /> {link.label}
