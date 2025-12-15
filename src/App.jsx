@@ -1,16 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, GraduationCap, BookOpen, Link as LinkIcon } from "lucide-react";
+
+import { Github, GraduationCap, BookOpen, Link as LinkIcon, Globe, Bird, Microscope, Glasses } from "lucide-react";
+
 
 const PROFILE = {
   name: "Adi Ben Zvi",
   role: "PhD Student · Virus Evolution & Bioinformatics",
-  affiliation: "Adi Stern Lab · Tel Aviv University",
-  photoUrl: "/your-photo.jpg",
+  affiliation: "Adi Stern Lab @ Tel Aviv University",
+  photoUrl: "public/your-photo.jpg",
   blurb:
     "I study within-host virus evolution and computational genomics. My research focuses on SARS‑CoV‑2 intra‑host diversity, methods for detecting suspicious mutations, and building reproducible pipelines for large-scale genomic analysis.",
   socials: {
-    x: "https://https://x.com/BZman101.com/your-handle",
+    x: "https://x.com/BZman101",
     bluesky: "https://bsky.app/profile/adibz.bsky.social",
     github: "https://github.com/adibnzv",
     researchgate: "https://www.researchgate.net/profile/Adi-Ben-Zvi-2?ev=hdr_xprf",
@@ -18,6 +20,26 @@ const PROFILE = {
   },
 };
 
+const publications = [
+  {
+    title: "Diverse patterns of intra-host genetic diversity in chronically infected SARS-CoV-2 patients",
+    authors: "Ben Zvi A. et al.",
+    journal: "Virus Evolution · 2025",
+    links: [
+      { label: "DOI", href: "https://doi.org/10.1093/ve/veaf047" },
+      { label: "Code", href: "https://github.com/Stern-Lab/chronic-time-series-2024" },
+    ],
+  },
+  {
+    title: "Navigating a Fine Balance: Point-Mutant Cheater Viruses Disrupt the Viral Replication Cycle",
+    authors: "Meir M., Kahn A., Farage C., Maoz A., Harel N., Ben Zvi A., Segev S., Volkov M., Yahud R., Gophna U., Stern A.",
+    journal: "Molecular Biology and Evolution · 2024",
+    links: [
+      { label: "DOI", href: "https://doi.org/10.1093/molbev/msae258" },
+      { label: "Code", href: "https://github.com/Stern-Lab/cheaters_fine_balance" },
+    ],
+  },
+];
 const Section = ({ id, title, icon, children }) => (
   <section id={id} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div className="flex items-center gap-3 mb-6">
@@ -60,16 +82,23 @@ export default function PersonalWebsite() {
             <p className="mt-6 max-w-2xl text-slate-800 leading-relaxed">{PROFILE.blurb}</p>
 
             <div className="mt-6 flex flex-wrap gap-4">
-              {PROFILE.socials.x && <SocialLink label="X" href={PROFILE.socials.x} />}
-              {PROFILE.socials.bluesky && <SocialLink label="Bluesky" href={PROFILE.socials.bluesky} />}
+              {PROFILE.socials.x && (
+                <SocialLink label="X" href={PROFILE.socials.x} Icon={Bird} />
+              )}
+              {PROFILE.socials.bluesky && (
+                <SocialLink label="Bluesky" href={PROFILE.socials.bluesky} Icon={Globe} />
+              )}
               {PROFILE.socials.github && (
                 <SocialLink label="GitHub" href={PROFILE.socials.github} Icon={Github} />
               )}
               {PROFILE.socials.researchgate && (
-                <SocialLink label="ResearchGate" href={PROFILE.socials.researchgate} />
+                <SocialLink label="ResearchGate" href={PROFILE.socials.researchgate} Icon={Microscope } />
               )}
-              {PROFILE.socials.orcid && <SocialLink label="ORCID" href={PROFILE.socials.orcid} />}
+              {PROFILE.socials.orcid && (
+                <SocialLink label="ORCID" href={PROFILE.socials.orcid} Icon={Glasses} />
+              )}
             </div>
+
           </div>
 
           <div className="shrink-0">
@@ -85,36 +114,77 @@ export default function PersonalWebsite() {
       </header>
 
       <Section id="publications" title="Publications" icon={<BookOpen className="w-6 h-6 text-slate-700" />}>
-        <ul className="space-y-6">
-          <li className="p-5 rounded-2xl bg-white shadow-sm border border-slate-200">
-            <h3 className="text-lg sm:text-xl font-semibold leading-snug">
-              Diverse patterns of intra‑host genetic diversity in chronically infected SARS‑CoV‑2 patients
-            </h3>
-            <p className="mt-1 text-sm text-slate-700">A. Ben Zvi, et al.</p>
-            <p className="text-sm text-slate-600">Virus Evolution · 2025</p>
+      <ul className="space-y-6">
+        {publications.map((pub, i) => (
+          <li key={i} className="p-5 rounded-2xl bg-white shadow-sm border border-slate-200">
+            <h3 className="text-lg sm:text-xl font-semibold leading-snug">{pub.title}</h3>
+
+            {/* Authors */}
+            <p className="mt-1 text-sm text-slate-700">
+              {pub.authors.split(", ").map((author, j) => {
+                const trimmed = author.trim();
+                const isMe = /\bBen\s*Zvi\b/.test(trimmed); // matches "Ben Zvi" but not "et al."
+
+                return (
+                  <span key={j}>
+                    {isMe ? (
+                      <span className="underline font-semibold underline-offset-2 decoration-slate-500">
+                        {trimmed.replace("et al.", "").trim()}
+                      </span>
+                    ) : (
+                      trimmed
+                    )}
+                    {trimmed.includes("et al.") && " et al."}
+                    {j < pub.authors.split(", ").length - 1 && ", "}
+                  </span>
+                );
+              })}
+            </p>
+
+            <p className="text-sm text-slate-600">{pub.journal}</p>
+
             <div className="mt-3 flex flex-wrap gap-3">
-              <a href="#" className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-50">
-                <LinkIcon className="w-4 h-4" /> Paper
-              </a>
-              <a href="#" className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-50">
-                <LinkIcon className="w-4 h-4" /> Code
-              </a>
+              {pub.links.map((link, j) => (
+                <a
+                  key={j}
+                  href={link.href}
+                  className="inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border border-slate-300 hover:bg-slate-50"
+                >
+                  <LinkIcon className="w-4 h-4" /> {link.label}
+                </a>
+              ))}
             </div>
           </li>
-        </ul>
+        ))}
+      </ul>
+
+
       </Section>
 
       <Section id="education" title="Education" icon={<GraduationCap className="w-6 h-6 text-slate-700" />}>
         <ol className="relative border-s-l border-slate-200 ml-3">
-          <li className="ms-6 pb-8 last:pb-0">
-            <span className="absolute -start-1.5 flex h-3 w-3 rounded-full bg-slate-700 ring-4 ring-white" />
+          <li className="space-6 pb-8 last:pb-0">
             <div className="p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
               <h3 className="text-base sm:text-lg font-semibold">Tel Aviv University</h3>
-              <p className="text-sm text-slate-700">PhD, Bioinformatics (Virus Evolution)</p>
-              <p className="text-xs text-slate-600">2023 – Present</p>
+              <p className="text-base sm:text-lg text-slate-700">PhD, Bioinformatics (Virus Evolution)</p>
+              <p className="text-base sm:text-med text-slate-700">2023 – Present</p>
               <p className="mt-2 text-sm text-slate-700 leading-relaxed">
                 Research in viral evolution, intra‑host dynamics, and computational genomics in the Adi Stern Lab.
               </p>
+            </div>
+          </li>
+          <li className="space-6 pb-8 last:pb-0">
+            <div className="p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
+              <h3 className="text-base sm:text-lg font-semibold">Tel Aviv University</h3>
+              <p className="text-base sm:text-lg text-slate-700">MSc, Bioinformatics (as part of the direct PhD program)</p>
+              <p className="text-base sm:text-med text-slate-700">2022 – 2023</p>
+            </div>
+          </li>
+          <li className="space-6 pb-8 last:pb-0">
+            <div className="p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
+              <h3 className="text-base sm:text-lg font-semibold">Tel Aviv University</h3>
+              <p className="text-base sm:text-lg text-slate-700">BSc, Biology</p>
+              <p className="text-base sm:text-med text-slate-700">2019 – 2022</p>
             </div>
           </li>
         </ol>
