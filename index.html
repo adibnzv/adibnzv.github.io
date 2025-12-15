@@ -3,10 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adi Ben Zvi – Personal Website</title>
+    <title>Adi-Ben-Zvi.com</title>
   </head>
   <body class="bg-slate-50">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+        <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("a[href]").forEach(link => {
+          const href = link.getAttribute("href");
+          // open all links except same-page anchors
+          if (href && !href.startsWith("#")) {
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+          }
+        });
+      });
+    </script>
   </body>
 </html>
