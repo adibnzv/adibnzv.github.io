@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 html, body, #root { height: 100%; }
+html {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}

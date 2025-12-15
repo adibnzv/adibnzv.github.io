@@ -1,7 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import React, { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import { Github, GraduationCap, BookOpen, Link as LinkIcon, Globe, Bird, Microscope, Glasses } from "lucide-react";
+import ThemeToggle from "./components/ThemeToggle";
 
 
 const PROFILE = {
@@ -19,7 +21,50 @@ const PROFILE = {
     orcid: "https://orcid.org/my-orcid?orcid=0009-0003-5906-6821",
   },
 };
+export default function ThemeToggle() {
+  const [dark, setDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
+  // Keep icon in sync when system preference changes
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = () => {
+      if (!("theme" in localStorage)) {
+        setDark(mq.matches);
+      }
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const toggle = () => {
+    const html = document.documentElement;
+    const newDark = !html.classList.contains("dark");
+    html.classList.toggle("dark", newDark);
+    localStorage.theme = newDark ? "dark" : "light";
+    setDark(newDark);
+  };
+
+  return (
+    <button
+      onClick={toggle}
+      className="relative w-10 h-10 rounded-full border border-slate-300 dark:border-slate-600
+                 flex items-center justify-center transition bg-white dark:bg-slate-800
+                 hover:scale-105 shadow-sm"
+      aria-label="Toggle dark mode"
+    >
+      <Sun
+        className={`absolute w-5 h-5 text-yellow-500 transition-all duration-500
+                    ${dark ? "opacity-0 scale-0" : "opacity-100 scale-100"}`}
+      />
+      <Moon
+        className={`absolute w-5 h-5 text-slate-100 transition-all duration-500
+                    ${dark ? "opacity-100 scale-100" : "opacity-0 scale-0"}`}
+      />
+    </button>
+  );
+}
 const publications = [
   {
     title: "Diverse patterns of intra-host genetic diversity in chronically infected SARS-CoV-2 patients",
@@ -64,7 +109,8 @@ const SocialLink = ({ label, href, Icon }) => (
 
 export default function PersonalWebsite() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white text-slate-900 
+                dark:from-slate-900 dark:to-slate-950 dark:text-slate-100">
       <header className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -73,9 +119,20 @@ export default function PersonalWebsite() {
           className="flex flex-col-reverse md:flex-row items-center md:items-end justify-between gap-8"
         >
           <div className="flex-1">
-            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight 
+               text-slate-900 dark:text-slate-100">
               {PROFILE.name}
             </h1>
+            <header className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+              <div className="flex justify-between items-center mb-4">
+                <h1 className="text-3xl sm:text-5xl font-bold tracking-tight leading-tight">
+                  <span className="bg-gradient-to-r from-slate-900 to-slate-500 dark:from-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
+                    {PROFILE.name}
+                  </span>
+                </h1>
+                <ThemeToggle />
+              </div>
+            </header>
             <p className="mt-3 text-base sm:text-lg text-slate-700">{PROFILE.role}</p>
             <p className="text-sm sm:text-base text-slate-600">{PROFILE.affiliation}</p>
 
@@ -116,7 +173,8 @@ export default function PersonalWebsite() {
       <Section id="publications" title="Publications" icon={<BookOpen className="w-6 h-6 text-slate-700" />}>
       <ul className="space-y-6">
         {publications.map((pub, i) => (
-          <li key={i} className="p-5 rounded-2xl bg-white shadow-sm border border-slate-200">
+          <li className="p-5 rounded-2xl bg-white shadow-sm border border-slate-200 
+               dark:bg-slate-800 dark:border-slate-700 dark:shadow-none transition">
             <h3 className="text-lg sm:text-xl font-semibold leading-snug">{pub.title}</h3>
 
             {/* Authors */}
@@ -164,7 +222,8 @@ export default function PersonalWebsite() {
       </Section>
 
       <Section id="education" title="Education" icon={<GraduationCap className="w-6 h-6 text-slate-700" />}>
-        <ol className="relative border-s-l border-slate-200 ml-3">
+        <div className="p-5 bg-white rounded-2xl shadow-sm border border-slate-200 
+                dark:bg-slate-800 dark:border-slate-700 transition">
           <li className="space-6 pb-8 last:pb-0">
             <div className="p-5 bg-white rounded-2xl shadow-sm border border-slate-200">
               <h3 className="text-base sm:text-lg font-semibold">Tel Aviv University</h3>
@@ -192,7 +251,7 @@ export default function PersonalWebsite() {
         </ol>
       </Section>
 
-      <footer className="py-12 text-center text-xs text-slate-500">
+      <footer className="py-12 text-center text-xs text-slate-500 dark:text-slate-400">
         © {new Date().getFullYear()} {PROFILE.name}. All rights reserved.
       </footer>
     </div>
