@@ -248,7 +248,7 @@ export default function PersonalWebsite() {
               <p className="text-base sm:text-med text-slate-700">2019 – 2022</p>
             </div>
           </li>
-        </ol>
+        </div>
       </Section>
 
       <footer className="py-12 text-center text-xs text-slate-500 dark:text-slate-400">
